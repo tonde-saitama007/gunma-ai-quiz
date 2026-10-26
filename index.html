@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#285943">
+  <meta name="description" content="群馬の名所・歴史・グルメに挑戦！30問から10問が出る、15秒制限の群馬愛クイズ。">
+  <title>あなたの群馬愛は何点？｜群馬愛クイズ</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:#243d30;background:#f4f6ed}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% 0%,#d4e6cc 0,transparent 35%),linear-gradient(165deg,#fbfcf7,#e7efdf)}
+    button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #ef7c38;outline-offset:3px}
+    .wrap{width:min(100% - 28px,680px);margin:0 auto;padding:25px 0 48px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.1em;color:#396249;margin-bottom:20px}
+    .brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#3f7350;color:white;font-size:22px}
+    .card{background:#fff;border:1px solid #dce5d6;border-radius:28px;box-shadow:0 16px 45px #35563826;padding:clamp(22px,5vw,42px)}
+    .eyebrow{color:#96552c;font-weight:900;letter-spacing:.15em;font-size:.85rem;margin:0 0 10px}
+    h1{font-size:clamp(2rem,6vw,3.25rem);line-height:1.25;letter-spacing:-.04em;margin:0 0 18px}
+    h2{font-size:clamp(1.5rem,4.5vw,2rem);line-height:1.4;margin:0 0 20px}
+    p{line-height:1.8}.lead{font-size:1.08rem;color:#586b58;margin:0 0 25px}
+    .hero-badge{width:90px;height:90px;display:grid;place-items:center;border-radius:26px;background:#f3e3c4;font-size:48px;transform:rotate(-7deg);margin:0 0 24px}
+    .howto{background:#eff4e8;border-radius:16px;padding:16px 20px;margin:20px 0 25px;line-height:1.8}
+    .howto strong{color:#385c3c}
+    .level-label{display:block;font-weight:800;margin-bottom:10px}
+    .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:23px}
+    .level{background:#fff;border:2px solid #cadbea;color:#2a5170;border-radius:12px;padding:12px 5px;font-weight:800;min-height:48px}
+    .level[aria-pressed="true"]{background:#dfeffc;border-color:#3f7350;box-shadow:inset 0 0 0 1px #3f7350}
+    .primary,.secondary{width:100%;border:0;border-radius:15px;min-height:54px;font-weight:900;padding:12px 18px}
+    .primary{background:#3f7350;color:white;box-shadow:0 8px 0 #294d35}.primary:hover{background:#315c40}.primary:active{transform:translateY(4px);box-shadow:0 4px 0 #294d35}
+    .secondary{background:#edf2e4;color:#365c3c;margin-top:12px}.secondary:hover{background:#dfe9d2}
+    .topline{display:flex;justify-content:space-between;gap:10px;font-weight:900;color:#466248;margin-bottom:12px}
+    .track{height:10px;border-radius:99px;background:#e4ebda;overflow:hidden;margin-bottom:22px}.fill{height:100%;width:0;background:#b78345;transition:width .35s}
+    .timerbox{display:flex;align-items:center;justify-content:space-between;gap:14px;border:2px solid #dfe7d7;border-radius:16px;padding:11px 16px;margin-bottom:20px;font-weight:800}
+    .timerbox.urgent{color:#a13027;border-color:#e8a198;background:#fff6f3}
+    .time{font-size:1.5rem;font-variant-numeric:tabular-nums}
+    .question-tag{color:#96552c;font-size:.82rem;font-weight:900;letter-spacing:.12em}
+    .answers{display:grid;gap:10px;margin:20px 0}
+    .answer{width:100%;text-align:left;background:#fff;border:2px solid #dfe6d8;border-radius:14px;padding:15px 17px;color:#2e4934;font-weight:800;min-height:57px;line-height:1.45}
+    .answer:hover:not(:disabled){border-color:#3f7350;background:#f4f8ed}
+    .answer:disabled{cursor:default}.answer.correct{background:#e2f5e4;border-color:#16834c}.answer.wrong{background:#fff0eb;border-color:#d46a57}
+    .feedback{border-radius:16px;background:#f4f6ed;padding:18px 19px;margin:10px 0 18px;border-left:5px solid #5c7e49}
+    .feedback.bad{background:#fff5ee;border-left-color:#d07a37}.feedback strong{font-size:1.1rem}.feedback p{margin:6px 0 0}
+    .result-score{font-size:clamp(4rem,15vw,6rem);font-weight:1000;line-height:1;margin:16px 0;color:#3f7350;letter-spacing:-.08em}
+    .result-score small{font-size:1.4rem;letter-spacing:0;margin-left:8px}
+    .title-chip{display:inline-block;background:#f3e3c4;color:#805126;border-radius:999px;font-weight:900;padding:8px 16px;margin:8px 0}
+    .result-copy{color:#566a56;margin-bottom:18px}.result-meta{border-top:1px solid #e1e8d9;padding-top:15px;color:#52684d}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .foot{font-size:.78rem;color:#65745f;text-align:center;margin-top:18px;line-height:1.6}
+    @media(max-width:430px){.wrap{width:min(100% - 20px,680px);padding-top:14px}.card{border-radius:22px}.levels{gap:5px}.level{font-size:.92rem}.topline{font-size:.9rem}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">群</span><span>GUNMA LOVE QUIZ</span></div>
+    <section id="start" class="card">
+      <div class="hero-badge" aria-hidden="true">⛰️</div>
+      <p class="eyebrow">群馬を、どこまで知ってる？</p>
+      <h1>あなたの群馬愛は<br>何点？</h1>
+      <p class="lead">名所、グルメ、歴史まで。10問であなたの群馬愛を測ろう！</p>
+      <div class="howto"><strong>遊び方</strong><br>30問からランダムで10問。各問4択、制限時間は15秒。正解8点＋早押しボーナス最大2点で、100点満点！</div>
+      <button id="start-btn" class="primary" type="button" onclick="window.quizStartFallback && window.quizStartFallback()">クイズを始める →</button>
+    </section>
+    <section id="quiz" class="card" hidden aria-live="off">
+      <div class="topline"><span id="count"></span><span id="score"></span></div>
+      <div class="track" role="progressbar" aria-label="クイズの進行" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress" class="fill"></div></div>
+      <div id="timerbox" class="timerbox"><span>残り時間</span><span id="time" class="time" aria-live="off">15.0秒</span></div>
+      <p id="category" class="question-tag"></p>
+      <h2 id="question" tabindex="-1"></h2>
+      <div id="answers" class="answers" role="group" aria-label="回答の選択肢"></div>
+      <div id="feedback" class="feedback" hidden role="status"></div>
+      <button id="next-btn" class="primary" type="button" hidden>次の問題へ →</button>
+    </section>
+    <section id="result" class="card" hidden aria-live="polite">
+      <p class="eyebrow">RESULT</p>
+      <h1>あなたの群馬愛は…</h1>
+      <div class="result-score"><span id="final-score">0</span><small>点 / 100点</small></div>
+      <div id="rank" class="title-chip"></div>
+      <p id="result-copy" class="result-copy"></p>
+      <p id="result-meta" class="result-meta"></p>
+      <button id="image-share-btn" class="primary" type="button">画像を保存する</button>
+      <button id="copy-btn" class="secondary" type="button">シェア用リンクをコピー</button>
+      <button id="retry-btn" class="secondary" type="button">もう一度挑戦</button>
+    </section>
+    <div class="foot">このクイズは非公式のファン作品です。群馬県・自治体による公式企画ではありません。</div>
+  </main>
+  <script>
+    "use strict";
+    // 全30問から毎回ランダムに10問。aは正解の選択肢番号（0〜3）。
+    const QUESTIONS = [
+  {
+    "c": "基本",
+    "q": "群馬県の県庁所在地は？",
+    "o": [
+      "前橋市",
+      "高崎市",
+      "桐生市",
+      "太田市"
+    ],
+    "a": 0,
+    "e": "県庁があるのは前橋市です。"
+  },
+  {
+    "c": "地理",
+    "q": "群馬県がある地方は？",
+    "o": [
+      "東北地方",
+      "関東地方",
+      "中部地方",
+      "近畿地方"
+    ],
+    "a": 1,
+    "e": "群馬県は関東地方の北西部に位置しています。"
+  },
+  {
+    "c": "地理",
+    "q": "群馬県は海に面している？",
+    "o": [
+      "太平洋に面する",
+      "日本海に面する",
+      "海に面しない",
+      "両方に面する"
+    ],
+    "a": 2,
+    "e": "群馬県は海のない内陸県です。"
+  },
+  {
+    "c": "文化",
+    "q": "群馬県の形は、空を舞う何にたとえられる？",
+    "o": [
+      "ワシ",
+      "ハト",
+      "ツバメ",
+      "ツル"
+    ],
+    "a": 3,
+    "e": "県の形は、翼を広げて舞うツルにたとえられています。"
+  },
+  {
+    "c": "記念日",
+    "q": "群馬県民の日は何月何日？",
+    "o": [
+      "10月28日",
+      "11月14日",
+      "10月1日",
+      "6月15日"
+    ],
+    "a": 0,
+    "e": "群馬県民の日は10月28日です。"
+  },
+  {
+    "c": "シンボル",
+    "q": "群馬県の花は？",
+    "o": [
+      "サクラソウ",
+      "レンゲツツジ",
+      "バラ",
+      "ウメ"
+    ],
+    "a": 1,
+    "e": "県の花はレンゲツツジ。初夏の高原などで鮮やかな花を咲かせます。"
+  },
+  {
+    "c": "気候",
+    "q": "群馬の冬に吹く、冷たく乾いた強い風の呼び名は？",
+    "o": [
+      "やませ",
+      "海風",
+      "空っ風",
+      "夕凪"
+    ],
+    "a": 2,
+    "e": "冬の平野部では、冷たく乾燥した季節風の「空っ風」が吹きます。"
+  },
+  {
+    "c": "自然",
+    "q": "上毛三山は、赤城山・榛名山ともう一つは？",
+    "o": [
+      "富士山",
+      "筑波山",
+      "高尾山",
+      "妙義山"
+    ],
+    "a": 3,
+    "e": "赤城山・榛名山・妙義山の三つを上毛三山と呼びます。"
+  },
+  {
+    "c": "温泉",
+    "q": "草津温泉の中心にある、湯けむりで知られるシンボルは？",
+    "o": [
+      "湯畑",
+      "砂丘",
+      "棚田",
+      "竹林"
+    ],
+    "a": 0,
+    "e": "湯畑は草津温泉街の中心にある源泉で、温泉街のシンボルです。"
+  },
+  {
+    "c": "温泉",
+    "q": "草津温泉で、板を使って熱い湯の温度を下げる伝統は？",
+    "o": [
+      "湯切り",
+      "湯もみ",
+      "湯むき",
+      "湯通し"
+    ],
+    "a": 1,
+    "e": "湯もみは、源泉を水で薄めずに入浴に適した温度へ下げるための伝統的な方法です。"
+  },
+  {
+    "c": "温泉",
+    "q": "伊香保温泉の石段街は何段？",
+    "o": [
+      "100段",
+      "180段",
+      "365段",
+      "1,000段"
+    ],
+    "a": 2,
+    "e": "一年を通してにぎわうことを願い、石段は365段に整備されました。"
+  },
+  {
+    "c": "温泉",
+    "q": "群馬の温泉地「四万温泉」の読み方は？",
+    "o": [
+      "よんまんおんせん",
+      "しよろずおんせん",
+      "よまおんせん",
+      "しまおんせん"
+    ],
+    "a": 3,
+    "e": "「しまおんせん」と読みます。山に囲まれた温泉地です。"
+  },
+  {
+    "c": "温泉",
+    "q": "四万温泉がある町は？",
+    "o": [
+      "中之条町",
+      "大洗町",
+      "軽井沢町",
+      "草津町"
+    ],
+    "a": 0,
+    "e": "四万温泉は群馬県中之条町にあります。"
+  },
+  {
+    "c": "グルメ",
+    "q": "群馬名物「焼きまんじゅう」に塗る代表的なたれは？",
+    "o": [
+      "トマトソース",
+      "甘い味噌だれ",
+      "マヨネーズ",
+      "わさび醤油"
+    ],
+    "a": 1,
+    "e": "串に刺したまんじゅうに、甘みのある味噌だれを塗って焼きます。"
+  },
+  {
+    "c": "グルメ",
+    "q": "郷土料理「おっきりこみ」で野菜と煮込むものは？",
+    "o": [
+      "細い米麺",
+      "パン",
+      "幅広の小麦の麺",
+      "揚げたそば"
+    ],
+    "a": 2,
+    "e": "おっきりこみは、幅広の小麦の麺を野菜などと一緒に煮込む料理です。"
+  },
+  {
+    "c": "農産物",
+    "q": "嬬恋村の高原で栽培が盛んな野菜は？",
+    "o": [
+      "ゴーヤー",
+      "レンコン",
+      "オクラ",
+      "キャベツ"
+    ],
+    "a": 3,
+    "e": "嬬恋村は高原キャベツの産地。冷涼な気候を生かして栽培されています。"
+  },
+  {
+    "c": "農産物",
+    "q": "「殿様ねぎ」とも呼ばれる群馬の名産は？",
+    "o": [
+      "下仁田ねぎ",
+      "九条ねぎ",
+      "深谷ねぎ",
+      "越津ねぎ"
+    ],
+    "a": 0,
+    "e": "下仁田ねぎは「殿様ねぎ」の別名でも知られます。"
+  },
+  {
+    "c": "グルメ",
+    "q": "群馬の特産「こんにゃく」の原料となる植物は？",
+    "o": [
+      "さつまいも",
+      "こんにゃくいも",
+      "じゃがいも",
+      "長いも"
+    ],
+    "a": 1,
+    "e": "こんにゃくは、こんにゃくいもを原料にして作られます。"
+  },
+  {
+    "c": "工芸",
+    "q": "縁起物の「だるま」作りで知られる群馬の市は？",
+    "o": [
+      "水戸市",
+      "川越市",
+      "高崎市",
+      "甲府市"
+    ],
+    "a": 2,
+    "e": "高崎では伝統的にだるまが作られ、「高崎だるま」として親しまれています。"
+  },
+  {
+    "c": "歴史",
+    "q": "群馬の絹産業を代表する世界遺産の工場は？",
+    "o": [
+      "八幡製鐵所",
+      "造幣局",
+      "足尾銅山",
+      "富岡製糸場"
+    ],
+    "a": 3,
+    "e": "富岡製糸場は、日本の近代製糸業の発展に大きな役割を果たしました。"
+  },
+  {
+    "c": "歴史",
+    "q": "富岡製糸場が設立された年は？",
+    "o": [
+      "1872年",
+      "1603年",
+      "1945年",
+      "2000年"
+    ],
+    "a": 0,
+    "e": "明治5年（1872年）に、明治政府が設立しました。"
+  },
+  {
+    "c": "歴史",
+    "q": "「富岡製糸場と絹産業遺産群」が世界遺産に登録された年は？",
+    "o": [
+      "1993年",
+      "2014年",
+      "1980年",
+      "2020年"
+    ],
+    "a": 1,
+    "e": "2014年に世界遺産に登録されました。"
+  },
+  {
+    "c": "工芸",
+    "q": "群馬の伝統工芸「桐生織」の産地として知られる市は？",
+    "o": [
+      "館林市",
+      "沼田市",
+      "桐生市",
+      "安中市"
+    ],
+    "a": 2,
+    "e": "桐生は、古くから織物の産地として発展してきました。"
+  },
+  {
+    "c": "自然",
+    "q": "尾瀬の初夏を代表する、白い姿が印象的な植物は？",
+    "o": [
+      "ヒマワリ",
+      "コスモス",
+      "ネモフィラ",
+      "ミズバショウ"
+    ],
+    "a": 3,
+    "e": "尾瀬はミズバショウの名所として知られています。"
+  },
+  {
+    "c": "自然",
+    "q": "「吹割の滝」がある群馬の市は？",
+    "o": [
+      "沼田市",
+      "高崎市",
+      "太田市",
+      "藤岡市"
+    ],
+    "a": 0,
+    "e": "吹割の滝は沼田市利根町にあります。"
+  },
+  {
+    "c": "名所",
+    "q": "安中市にある碓氷第三橋梁の愛称は？",
+    "o": [
+      "虹の橋",
+      "めがね橋",
+      "かずら橋",
+      "太鼓橋"
+    ],
+    "a": 1,
+    "e": "碓氷第三橋梁は、連なるアーチから「めがね橋」と呼ばれています。"
+  },
+  {
+    "c": "名所",
+    "q": "碓氷第三橋梁「めがね橋」の主な建築材料は？",
+    "o": [
+      "竹",
+      "ガラス",
+      "レンガ",
+      "氷"
+    ],
+    "a": 2,
+    "e": "めがね橋は、明治時代に造られたレンガのアーチ橋です。"
+  },
+  {
+    "c": "シンボル",
+    "q": "群馬県のマスコットの名前は？",
+    "o": [
+      "くまモン",
+      "チーバくん",
+      "コバトン",
+      "ぐんまちゃん"
+    ],
+    "a": 3,
+    "e": "群馬県のマスコットは「ぐんまちゃん」です。"
+  },
+  {
+    "c": "産業",
+    "q": "群馬で盛んだった養蚕で、繭を作るために育てる生き物は？",
+    "o": [
+      "カイコ",
+      "ミツバチ",
+      "ホタル",
+      "カブトムシ"
+    ],
+    "a": 0,
+    "e": "養蚕はカイコを育てて繭を生産する仕事です。繭から生糸を取り出します。"
+  },
+  {
+    "c": "自然",
+    "q": "榛名山の火山活動によって生まれた湖は？",
+    "o": [
+      "霞ヶ浦",
+      "榛名湖",
+      "浜名湖",
+      "琵琶湖"
+    ],
+    "a": 1,
+    "e": "榛名湖は榛名山の火山活動で生まれた湖で、高崎市にあります。"
+  }
+];
+    const $=id=>document.getElementById(id);
+    const state={selected:[],index:0,points:0,correct:0,deadline:0,timer:null,locked:false};
+    const shuffle=list=>{const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+    function choose(){return shuffle(QUESTIONS).slice(0,10)}
+    function show(which){for(const id of ["start","quiz","result"])$(id).hidden=id!==which;window.scrollTo({top:0,behavior:"instant"})}
+    function stopTimer(){if(state.timer!==null){clearInterval(state.timer);state.timer=null}}
+    function start(){stopTimer();$("copy-btn").textContent="シェア用リンクをコピー";state.selected=choose();state.index=0;state.points=0;state.correct=0;show("quiz");renderQuestion()}
+    function renderQuestion(){
+      state.locked=false;const q=state.selected[state.index];
+      $("count").textContent=`第${state.index+1}問 / 10問`;
+      $("score").textContent=`${state.points}点`;
+      $("progress").style.width=`${state.index*10}%`;
+      document.querySelector(".track").setAttribute("aria-valuenow",String(state.index));
+      $("category").textContent=q.c;
+      $("question").textContent=q.q;
+      $("feedback").hidden=true;$("next-btn").hidden=true;
+      const answers=$("answers");answers.replaceChildren();
+      q.o.forEach((option,i)=>{const b=document.createElement("button");b.type="button";b.className="answer";b.textContent=`${"ABCD"[i]}. ${option}`;b.addEventListener("click",()=>answer(i));answers.append(b)});
+      $("timerbox").classList.remove("urgent");
+      state.deadline=performance.now()+15000;tick();state.timer=setInterval(tick,50);
+      $("question").focus({preventScroll:true});
+    }
+    function tick(){if(state.locked)return;const ms=Math.max(0,state.deadline-performance.now());$("time").textContent=`${(ms/1000).toFixed(1)}秒`;$("timerbox").classList.toggle("urgent",ms<=5000);if(ms<=0)answer(null)}
+    function answer(choice){
+      if(state.locked)return;
+      const remaining=Math.max(0,state.deadline-performance.now());
+      if(remaining<=0)choice=null;
+      state.locked=true;stopTimer();
+      const q=state.selected[state.index],isCorrect=choice===q.a;
+      let gained=0;
+      if(isCorrect){const elapsed=15-remaining/1000;const bonus=elapsed<=5?2:elapsed<=10?1:0;gained=8+bonus;state.points+=gained;state.correct++}
+      $("score").textContent=`${state.points}点`;
+      [...$("answers").children].forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct");else if(i===choice)b.classList.add("wrong")});
+      const feedback=$("feedback");feedback.classList.toggle("bad",!isCorrect);
+      const heading=document.createElement("strong");heading.textContent=isCorrect?`正解！ +${gained}点`:choice===null?"時間切れ！":"残念！";
+      const detail=document.createElement("p");detail.textContent=`正解：${q.o[q.a]}。${q.e}`;
+      feedback.replaceChildren(heading,detail);feedback.hidden=false;
+      $("next-btn").textContent=state.index===9?"結果を見る →":"次の問題へ →";$("next-btn").hidden=false;
+      $("next-btn").focus({preventScroll:true});
+    }
+    function rankFor(points){if(points>=90)return["上州マスター","もう群馬の案内人になれそう！"];if(points>=70)return["群馬愛の達人","かなり深い群馬愛です！"];if(points>=50)return["群馬通","名所も歴史もよく知っています！"];if(points>=30)return["群馬探検家","新しい群馬をまだまだ発見できそう！"];return["群馬ルーキー","ここから群馬の魅力を探していこう！"]}
+    function finish(){stopTimer();const [title,copy]=rankFor(state.points);$("final-score").textContent=state.points;$("rank").textContent=title;$("result-copy").textContent=copy;$("result-meta").textContent=`10問中${state.correct}問正解`;$("progress").style.width="100%";show("result")}
+    function shareText(){const [title]=rankFor(state.points);return `あなたの群馬愛は何点？\n${state.points}点／100点！称号は「${title}」⛰️\n10問中${state.correct}問正解。あなたも挑戦！\n▼ 群馬愛クイズに挑戦\nhttps://tonde-saitama007.github.io/gunma-ai-quiz/\n#群馬愛クイズ`}
+    async function copyResult(){
+      const url="https://tonde-saitama007.github.io/gunma-ai-quiz/";
+      let ok=false;
+      try{await navigator.clipboard.writeText(url);ok=true}catch(error){
+        const t=document.createElement("textarea");t.value=url;document.body.appendChild(t);t.focus();t.select();
+        try{ok=document.execCommand("copy")}catch(e){}t.remove();
+      }
+      $("copy-btn").textContent=ok?"リンクをコピーしました！":"コピーできませんでした";
+    }
+    async function shareResultImage(){
+      const button=$("image-share-btn");
+      button.disabled=true;button.textContent="画像を準備中…";
+      try{
+        const canvas=document.createElement("canvas");
+        canvas.width=1080;canvas.height=1080;
+        const ctx=canvas.getContext("2d");
+        if(!ctx)throw new Error("Canvas unavailable");
+        ctx.fillStyle="#f4f6ed";ctx.fillRect(0,0,1080,1080);
+        ctx.fillStyle="#3f7350";
+        ctx.beginPath();ctx.roundRect(55,50,100,100,24);ctx.fill();
+        ctx.fillStyle="#fff";ctx.font='bold 65px "Noto Sans JP",sans-serif';
+        ctx.textAlign="center";ctx.fillText("群",105,123);
+        ctx.textAlign="left";ctx.fillStyle="#396249";
+        ctx.font='bold 43px sans-serif';ctx.fillText("GUNMA LOVE QUIZ",180,115);
+        ctx.shadowColor="rgba(36,75,112,.12)";ctx.shadowBlur=28;ctx.shadowOffsetY=12;
+        ctx.fillStyle="#fff";ctx.beginPath();ctx.roundRect(55,190,970,835,42);ctx.fill();
+        ctx.shadowColor="transparent";ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+        ctx.fillStyle="#96552c";ctx.font="bold 33px sans-serif";ctx.fillText("RESULT",115,285);
+        ctx.fillStyle="#243d30";ctx.font='bold 65px "Noto Sans JP",sans-serif';
+        ctx.fillText("あなたの群馬愛は…",115,395);
+        ctx.fillStyle="#3f7350";ctx.font="bold 175px sans-serif";
+        const score=String(state.points);
+        ctx.fillText(score,115,630);
+        const scoreWidth=ctx.measureText(score).width;
+        ctx.font='bold 57px "Noto Sans JP",sans-serif';ctx.fillText("点 / 100点",135+scoreWidth,620);
+        const [rank,description]=rankFor(state.points);
+        ctx.font='bold 46px "Noto Sans JP",sans-serif';
+        const chipWidth=Math.min(850,ctx.measureText(rank).width+78);
+        ctx.fillStyle="#f3e3c4";ctx.beginPath();ctx.roundRect(115,695,chipWidth,95,48);ctx.fill();
+        ctx.fillStyle="#805126";ctx.fillText(rank,154,759);
+        ctx.fillStyle="#586b58";ctx.font='39px "Noto Sans JP",sans-serif';
+        ctx.fillText(description,115,865);
+        const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));
+        if(!blob)throw new Error("PNG unavailable");
+        const url=URL.createObjectURL(blob);
+        const link=document.createElement("a");
+        link.href=url;link.download="gunma-love-quiz-result.png";
+        document.body.appendChild(link);link.click();link.remove();
+        setTimeout(()=>URL.revokeObjectURL(url),60000);
+      }catch(error){
+        alert("画像を保存できませんでした。Chromeで開き直してお試しください。");
+      }finally{
+        button.disabled=false;button.textContent="画像を保存する";
+      }
+    }
+    $("image-share-btn").addEventListener("click",shareResultImage);
+    window.quizStartFallback=start;
+    $("next-btn").addEventListener("click",()=>{if(state.index===9)finish();else{state.index++;renderQuestion()}});
+    $("retry-btn").addEventListener("click",()=>{stopTimer();$("copy-btn").textContent="シェア用リンクをコピー";show("start")});
+    $("copy-btn").addEventListener("click",copyResult);
+    document.addEventListener("visibilitychange",()=>{if(document.hidden===false&&state.timer!==null)tick()});
+  </script>
+</body>
+</html>
