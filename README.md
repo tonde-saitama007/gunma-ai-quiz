@@ -13,21 +13,26 @@
 
 ## 公開
 
-予定リポジトリ：tonde-saitama007/gunma-ai-quiz
+リポジトリ：tonde-saitama007/gunma-ai-quiz
 
-予定URL：https://tonde-saitama007.github.io/gunma-ai-quiz/
+公開URL：https://tonde-saitama007.github.io/gunma-ai-quiz/
 
-2026年10月27日：制作・ローカル検証を完了し、GitHubにコードを配置。リンクコピーは上記URLをコピーします。GitHub Pagesの公開設定後に利用してください。
-
-GitHub Pages：Settings → Pages → Deploy from a branch → main → /(root) → Save
+GitHub Pages：Deploy from a branch → main → /(root) で公開中。
 
 ## 確認したこと
 
+公開前（ローカル）
 - JavaScript構文、DOM参照の整合性
 - DOM代替環境で30問の一意性・4択、100回のランダム抽選、100点、時間切れ、誤答、8/9/10点の採点、5段階称号
-- 実ブラウザで開始→10問→結果、得点・解説、結果の3ボタン、コピー成功表示、再挑戦
-- 結果画面の表示を目視確認
 
-未確認：実機スマートフォン、画像の実ファイル保存、コピー後の貼り付け内容、公開後の動作。
+公開後（2026年10月27日、公開URLをブラウザで操作）
+- 公開HTMLがmainのindex.htmlと一致
+- 開始→10問（重複なし）→結果、正解・誤答・時間切れ、解説表示
+- 採点（9点・10点の早押しボーナス、合計点、正解数、称号）
+- 画像保存で1080×1080のPNGが生成される
+- リンクコピーの成功表示、もう一度挑戦からの再開始
+- スマホ幅（375px）で表示崩れなし、コンソールエラーなし
+
+未確認：スマートフォン実機、保存した画像ファイルの見た目、コピー後の貼り付け内容。
 
 埼玉版と茨城版のコードは変更していません。
